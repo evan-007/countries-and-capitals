@@ -1,16 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app='cc-app'>
 <head>
 	<meta charset="UTF-8">
 	<title>Countries & Capitals</title>
   <link rel='stylesheet' type='text/css' href='main.css' />
 </head>
 <body>
-  <div class='container'>
+  <div class='container' ng-controller='countriesCtrl'>
     <h2>Countries & Capitals</h2>
+    <div ng-if='loading === true'>Loading!!!</div>
+    <ul>
+      <li ng-repeat='country in countries'>{{country.countryName}}</li>
+    </ul>
   </div>
 	<script src='../bower_components/angular/angular.js'></script>
 	<script src='../bower_components/angular-animate/angular-animate.js'></script>
 	<script src='../bower_components/angular-route/angular-route.js'></script>
+  <script src='cc-app.js'></script>
+  <script src='cc-data.js'></script>
 </body>
 </html>
