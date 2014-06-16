@@ -3,11 +3,8 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
 .config(function($routeProvider){
   $routeProvider
   .when('/', {
-    templateURL: 'home.html',
+    templateUrl: 'home/home.html',
     controller: 'countriesCtrl'
-  })
-  .when('/country', {
-    templateUrl: 'home.html'
   })
   .otherwise( {redirectTo: '/'});
 })
