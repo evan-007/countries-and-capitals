@@ -1,0 +1,9 @@
+body {
+  font-family: arial;
+}
+
+h2 {
+  font-size: 3em;
+  text-align: center;
+  border-bottom: 3px solid black;
+}
