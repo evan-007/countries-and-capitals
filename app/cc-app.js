@@ -7,7 +7,8 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
     controller: 'countriesCtrl'
   })
   .when('/countries/:id', {
-    templateUrl: 'country/country.html'
+    templateUrl: 'country/country.html',
+    controller: 'countryCtrl'
   })
   .otherwise( {redirectTo: '/'});
 })
@@ -22,12 +23,16 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
     console.log('done!');
   });
   
-  $scope.doit = function(country){
+  $scope.goTo = function(country){
     console.log(country);
     $location.path('/countries/'+country);
   };
 })
 
-.controller('countryCtrl', function($scope, Country){
-  
+.controller('countryCtrl', function($scope, Neighbors, $routeParams){
+  var id = $routeParams.id
+  console.log(id);
+  Neighbors(id).then(function(data){
+    $scope.neighbors = data;
+  });
 });

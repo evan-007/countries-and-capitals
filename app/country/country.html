@@ -1,2 +1,9 @@
 <h2>This is the country view</h2>
+<div class='neighbors'>
+  <ul>
+    <li ng-repeat='neighbor in neighbors'>
+      <a ng-href='/#/countries/{{neighbor.countryCode}}'>{{neighbor.countryName}}</a>
+    </li>
+  </ul>
+</div>
 <a href='/'>back to main</a>
