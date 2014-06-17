@@ -29,14 +29,17 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
   };
 })
 
-.controller('countryCtrl', function(CapitalData, Neighbors, $routeParams, $scope ){
+.controller('countryCtrl', function(CapitalData, Neighbors, NeighborData, $routeParams, $scope ){
   var id = $routeParams.id
   var capital = $routeParams.city
   $scope.city = $routeParams.city;
   $scope.id = $routeParams.id;
   $scope.mapId = $routeParams.id.toLowerCase();
   Neighbors(id).then(function(data){
-    $scope.neighbors = data;
+    NeighborData(data).then(function(neighbors){
+      $scope.neighbors = neighbors;
+    })
+    // $scope.neighbors = data.geonames;
   });
   CapitalData(id, capital).then(function(data){
     $scope.capital = data;
