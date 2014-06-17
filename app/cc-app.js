@@ -6,7 +6,7 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
     templateUrl: 'home/home.html',
     controller: 'countriesCtrl'
   })
-  .when('/countries/:id', {
+  .when('/countries/:id/:city', {
     templateUrl: 'country/country.html',
     controller: 'countryCtrl'
   })
@@ -23,16 +23,24 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
     console.log('done!');
   });
   
-  $scope.goTo = function(country){
+  $scope.goTo = function(country, capital){
     console.log(country);
-    $location.path('/countries/'+country);
+    $location.path('/countries/'+country+'/'+capital);
   };
 })
 
-.controller('countryCtrl', function($scope, Neighbors, $routeParams){
+.controller('countryCtrl', function($scope, Neighbors, $routeParams, CountryData){
   var id = $routeParams.id
+  var capital = $routeParams.city
+  $scope.city = $routeParams.city;
+  $scope.id = $routeParams.id;
+  $scope.mapId = $routeParams.id.toLowerCase();
   console.log(id);
   Neighbors(id).then(function(data){
     $scope.neighbors = data;
+  });
+  CountryData(id, capital).then(function(data){
+    console.log(data);
+    $scope.capital = data;
   });
 });

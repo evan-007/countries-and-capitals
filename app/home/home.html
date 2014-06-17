@@ -1,5 +1,5 @@
 <div ng-controller='countriesCtrl'>
-  <h2>angular</h2>
+  <h2>All the countries</h2>
   <div ng-if='loading === true'>Loading!!!</div>
   <table ng-if='countries'>
     <tr>
@@ -10,7 +10,7 @@
       <th>Population</th>
       <th>Continent</th>
     </tr>
-    <tr ng-repeat='country in countries' ng-click='goTo(country.countryCode)'>
+    <tr ng-repeat='country in countries' ng-click='goTo(country.countryCode, country.capital)'>
       <td>{{country.countryName}}</td>
       <td>{{country.countryCode}}</td>
       <td>{{country.capital}}</td>
