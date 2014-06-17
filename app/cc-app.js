@@ -13,7 +13,7 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
   .otherwise( {redirectTo: '/'});
 })
 
-.controller('countriesCtrl', function($scope, Countries, $location){
+.controller('countriesCtrl', function(Countries, $location, $scope){
   console.log('loading');
   $scope.loading = true;
   Countries().then(function(data){
@@ -29,17 +29,16 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
   };
 })
 
-.controller('countryCtrl', function($scope, Neighbors, $routeParams, CountryData){
+.controller('countryCtrl', function(CapitalData, Neighbors, $routeParams, $scope ){
   var id = $routeParams.id
   var capital = $routeParams.city
   $scope.city = $routeParams.city;
   $scope.id = $routeParams.id;
   $scope.mapId = $routeParams.id.toLowerCase();
-  console.log(id);
   Neighbors(id).then(function(data){
     $scope.neighbors = data;
   });
-  CountryData(id, capital).then(function(data){
+  CapitalData(id, capital).then(function(data){
     console.log(data);
     $scope.capital = data;
   });

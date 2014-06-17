@@ -28,7 +28,7 @@ angular.module('cc-data', [])
 })
 
 //should this factory return data.geonames[0] or should receiver know about data structure?
-.factory('CountryData', function(API_AUTH, $http, $q, SEARCH_PATH){
+.factory('CapitalData', function(API_AUTH, $http, $q, SEARCH_PATH){
   return function(countryId, capital){
     var defer = $q.defer();
     $http.get(SEARCH_PATH+'&name_equals='+capital+'&country='+countryId+API_AUTH, {cache: true})
