@@ -31,7 +31,7 @@ angular.module('cc-data', [])
 .factory('CountryData', function(API_AUTH, $http, $q, SEARCH_PATH){
   return function(countryId, capital){
     var defer = $q.defer();
-    $http.get(SEARCH_PATH+'&name_equals='+capital+'&country='+countryId+API_AUTH)
+    $http.get(SEARCH_PATH+'&name_equals='+capital+'&country='+countryId+API_AUTH, {cache: true})
     .success(function(data){
       defer.resolve(data.geonames[0]);
     });

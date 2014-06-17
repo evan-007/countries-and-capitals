@@ -1,6 +1,10 @@
-<h3>{{city}}</h3>
+<h3>{{city}} {{capital.countryName}}</h3>
 <img class='map' ng-src="http://www.geonames.org/img/country/250/{{id}}.png" />
 <img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
+<p>
+  Capital Population: {{capital.population}}
+  Capital: {{capital.toponymName}}
+</p>
 <div class='neighbors'>
   <ul>
     <li ng-repeat='neighbor in neighbors'>
