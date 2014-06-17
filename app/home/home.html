@@ -10,7 +10,7 @@
       <th>Population</th>
       <th>Continent</th>
     </tr>
-    <tr ng-repeat='country in countries'>
+    <tr ng-repeat='country in countries' ng-click='doit(country.countryCode)'>
       <td>{{country.countryName}}</td>
       <td>{{country.countryCode}}</td>
       <td>{{country.capital}}</td>

@@ -14,4 +14,8 @@ angular.module('cc-data', [])
     });
     return defer.promise;
   };
+})
+
+.factory('Country', function($http, API_AUTH, $q){
+  
 });
