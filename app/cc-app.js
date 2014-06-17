@@ -38,8 +38,8 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
   Neighbors(id).then(function(data){
     NeighborData(data).then(function(neighbors){
       $scope.neighbors = neighbors;
+      // oh shit all countries are neighbors if no neighbors!
     })
-    // $scope.neighbors = data.geonames;
   });
   CapitalData(id, capital).then(function(data){
     $scope.capital = data;

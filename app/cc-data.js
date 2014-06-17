@@ -4,7 +4,7 @@ angular.module('cc-data', [])
 .constant('API_AUTH', '&username=evan007')
 .constant('NEIGHBORS_PATH', 'http://api.geonames.org/neighboursJSON?country=')
 .constant('SEARCH_PATH', 'http://api.geonames.org/searchJSON?')
-//refactor into one factory?
+
 .factory('Countries', function(API_AUTH, COUNTRIES_PATH, $http, $q){
   return function(){
     var defer = $q.defer();
@@ -27,7 +27,6 @@ angular.module('cc-data', [])
           countryIds.push(data.geonames[n].countryCode);
         };
         defer.resolve(countryIds);
-        console.log(countryIds);
       };
     });
     return defer.promise;
@@ -46,7 +45,6 @@ angular.module('cc-data', [])
   };
 })
 
-//should this factory return data.geonames[0] or should receiver know about data structure?
 .factory('CapitalData', function(API_AUTH, $http, $q, SEARCH_PATH){
   return function(countryId, capital){
     var defer = $q.defer();
