@@ -16,14 +16,33 @@ angular.module('cc-data', [])
   };
 })
 
-.factory('Neighbors', function(API_AUTH, $http, NEIGHBORS_PATH, $q){
+.factory('Neighbors', function(API_AUTH, $http, NeighborData, NEIGHBORS_PATH, $q){
   return function(countryId){
     var defer = $q.defer();
     $http.get(NEIGHBORS_PATH+countryId+API_AUTH, {cache: true})
     .success(function(data){
+      if (data.geonames.length >= 0) {
+      var countryIds = [];
+      for(var n = 0; n < data.geonames.length; n++) {
+        countryIds.push(data.geonames[n].countryCode);
+      };
+      console.log(countryIds);
+    };
       defer.resolve(data.geonames);
     });
     return defer.promise;
+  };
+})
+
+.factory('NeighborData', function(API_AUTH, COUNTRIES_PATH, $http, $q) {
+  return function(countryArray) {
+    var countryIds = countryArray.join('&country=');
+    var defer = $q.defer();
+    $http.get(COUNTRIES_PATH+'&country='+countryIds+API_AUTH, { cache: true})
+    .success(function(data){
+      defer.resolve(data);
+      console.log(data);
+    });
   };
 })
 

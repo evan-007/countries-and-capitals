@@ -39,7 +39,6 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
     $scope.neighbors = data;
   });
   CapitalData(id, capital).then(function(data){
-    console.log(data);
     $scope.capital = data;
   });
 });
