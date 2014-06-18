@@ -1,4 +1,4 @@
-angular.module('cc-app', ['cc-data', 'ngRoute'])
+angular.module('cc-app', ['cc-data', 'ngRoute', 'ngAnimate'])
 
 .config(function($routeProvider){
   $routeProvider

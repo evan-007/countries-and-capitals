@@ -1,16 +1,22 @@
-<h3>{{city}} {{capital.countryName}}</h3>
-<img class='map' ng-src="http://www.geonames.org/img/country/250/{{id}}.png" />
-<img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
-<p>
-  Capital Population: {{capital.population}}
-  Capital: {{capital.toponymName}}
-</p>
-<div class='neighbors' ng-if='neighbors'>
-  <ul class='list-inline'>
-    <li>Neighbors:</li>
-    <li ng-repeat='neighbor in neighbors'>
-      <a ng-href='/#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>{{neighbor.countryName}}</a>
-    </li>
-  </ul>
+<div class='countryData' ng-if='capital && neighbors'>
+	<h3>{{city}} {{capital.countryName}}</h3>
+	<img class='map' ng-src="http://www.geonames.org/img/country/250/{{id}}.png" />
+	<img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
+	<p>
+	  Capital Population: {{capital.population}}
+	  Capital: {{capital.toponymName}}
+	</p>
+	<div class='neighbors' ng-if='neighbors'>
+	  <ul class='list-inline'>
+	    <li>Neighbors:</li>
+	    <li ng-repeat='neighbor in neighbors'>
+	      <a ng-href='/#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>{{neighbor.countryName}}</a>
+	    </li>
+	  </ul>
+	</div>
+	<ul class='list-inline'>
+		<li><a href='#/'>Home</a></li>
+		<li><a href='#/countries'>Countries</a></li>
+	</ul>
+	
 </div>
-<a href='/'>back to main</a>
