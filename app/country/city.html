@@ -7,13 +7,13 @@
 	  Capital Population: {{capital.population}}
 	  Capital: {{capital.toponymName}}
 	</p>
-	<div class='neighbors' ng-if='neighbors'>
+	<div class='neighbors'>
 	  <ul class='list-inline'>
-	    <li>
+	    <li class='stagger-animate'>
 	    	<ng-pluralize count='neighbors.length' when="{'0': 'No neighboring countries', 
 	    	'1' : '1 neighbor:', 'other': '{} neighbors:'}"></ng-pluralize>
 	    </li>
-	    <li ng-repeat='neighbor in neighbors'>
+	    <li ng-repeat='neighbor in neighbors' class='stagger-animate'>
 	      <a ng-href='/#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>{{neighbor.countryName}}</a>
 	    </li>
 	  </ul>

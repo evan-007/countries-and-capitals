@@ -17,7 +17,7 @@
         <th>Population</th>
         <th>Continent</th>
       </tr>
-      <tr ng-repeat='country in countries | filter: q' ng-click='goTo(country.countryCode, country.capital)' ng-class='{info : hover}' ng-mouseenter='hover = true' ng-mouseleave='hover = false'>
+      <tr class='stagger-animate' ng-repeat='country in countries | filter: q' ng-click='goTo(country.countryCode, country.capital)' ng-class='{info : hover}' ng-mouseenter='hover = true' ng-mouseleave='hover = false'>
         <td>{{country.countryName}}</td>
         <td>{{country.countryCode}}</td>
         <td>{{country.capital}}</td>
