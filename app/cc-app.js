@@ -17,13 +17,10 @@ angular.module('cc-app', ['cc-data', 'ngRoute', 'ngAnimate'])
 })
 
 .controller('countriesCtrl', function(Countries, $location, $scope){
-  console.log('loading');
   $scope.loading = true;
   Countries().then(function(data){
     $scope.countries = data.geonames;
-    console.log(data.geonames);
     $scope.loading = false;
-    console.log('done!');
   });
   
   $scope.goTo = function(country, capital){
@@ -44,7 +41,9 @@ angular.module('cc-app', ['cc-data', 'ngRoute', 'ngAnimate'])
       // oh shit all countries are neighbors if no neighbors!
     })
   });
+  $scope.loading = true;
   CapitalData(id, capital).then(function(data){
     $scope.capital = data;
+    $scope.loading = false;
   });
 });
