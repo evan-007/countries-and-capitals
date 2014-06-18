@@ -1,6 +1,6 @@
 <div class='loading' ng-if='loading'>Loading stuff...</div>
 <div class='countryData' ng-if='capital'>
-	<h3>{{city}} {{capital.countryName}}</h3>
+	<h3>{{city}} <a ng-href='#/countries/{{capital.countryCode}}'>{{capital.countryName}}</a></h3>
 	<img class='map' ng-src="http://www.geonames.org/img/country/250/{{id}}.png" />
 	<img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
 	<p>

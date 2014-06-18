@@ -37,20 +37,20 @@ angular.module('cc-app', ['cc-data', 'ngRoute', 'ngAnimate'])
 })
 
 .controller('cityCtrl', function(CapitalData, Neighbors, NeighborData, $routeParams, $scope ){
-  var id = $routeParams.id
-  var capital = $routeParams.city
+  var id = $routeParams.id;
+  var capital = $routeParams.city;
   $scope.city = $routeParams.city;
   $scope.id = $routeParams.id;
   $scope.mapId = $routeParams.id.toLowerCase();
   Neighbors(id).then(function(data){
     NeighborData(data).then(function(neighbors){
       $scope.neighbors = neighbors;
-      // oh shit all countries are neighbors if no neighbors!
-    })
+    });
   });
   $scope.loading = true;
   CapitalData(id, capital).then(function(data){
     $scope.capital = data;
+    console.log(data);
     $scope.loading = false;
   });
 })
