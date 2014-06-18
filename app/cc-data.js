@@ -21,7 +21,7 @@ angular.module('cc-data', [])
     var defer = $q.defer();
     $http.get(NEIGHBORS_PATH+countryId+API_AUTH, {cache: true})
     .success(function(data){
-      if (data.geonames.length >= 0) {
+      if (data.totalResultCount > 0) {
         var countryIds = [];
         for(var n = 0; n < data.geonames.length; n++) {
           countryIds.push(data.geonames[n].countryCode);

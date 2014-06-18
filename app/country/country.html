@@ -1,4 +1,4 @@
-<div class='countryData' ng-if='capital && neighbors'>
+<div class='countryData' ng-if='capital'>
 	<h3>{{city}} {{capital.countryName}}</h3>
 	<img class='map' ng-src="http://www.geonames.org/img/country/250/{{id}}.png" />
 	<img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
@@ -8,7 +8,10 @@
 	</p>
 	<div class='neighbors' ng-if='neighbors'>
 	  <ul class='list-inline'>
-	    <li>Neighbors:</li>
+	    <li>
+	    	<ng-pluralize count='neighbors.length' when="{'0': 'No neighboring countries', 
+	    	'1' : '1 neighbor:', 'other': '{} neighbors:'}"></ng-pluralize>
+	    </li>
 	    <li ng-repeat='neighbor in neighbors'>
 	      <a ng-href='/#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>{{neighbor.countryName}}</a>
 	    </li>
