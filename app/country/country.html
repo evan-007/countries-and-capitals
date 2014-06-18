@@ -5,8 +5,9 @@
   Capital Population: {{capital.population}}
   Capital: {{capital.toponymName}}
 </p>
-<div class='neighbors'>
-  <ul>
+<div class='neighbors' ng-if='neighbors'>
+  <ul class='list-inline'>
+    <li>Neighbors:</li>
     <li ng-repeat='neighbor in neighbors'>
       <a ng-href='/#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>{{neighbor.countryName}}</a>
     </li>
