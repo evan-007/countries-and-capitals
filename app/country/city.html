@@ -1,9 +1,12 @@
 <div class='loading' ng-if='loading'>Loading stuff...</div>
-<div class='countryData' ng-if='country'>
-	{{country}}
-	<h3>{{country.countryName}}</h3>
-	<img class='map' ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png" />
+<div class='countryData' ng-if='capital'>
+	<h3>{{city}} {{capital.countryName}}</h3>
+	<img class='map' ng-src="http://www.geonames.org/img/country/250/{{id}}.png" />
 	<img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
+	<p>
+	  Capital Population: {{capital.population}}
+	  Capital: {{capital.toponymName}}
+	</p>
 	<div class='neighbors' ng-if='neighbors'>
 	  <ul class='list-inline'>
 	    <li>

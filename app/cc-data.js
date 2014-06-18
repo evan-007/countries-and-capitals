@@ -54,4 +54,15 @@ angular.module('cc-data', [])
     });
     return defer.promise;
   };
+})
+
+.factory('CountryData', function(API_AUTH, $http, $q, COUNTRIES_PATH) {
+  return function(countryId) {
+    var defer = $q.defer();
+    $http.get(COUNTRIES_PATH+'&country='+countryId+API_AUTH, { cache: true})
+    .success(function(data){
+      defer.resolve(data.geonames);
+    });
+    return defer.promise;
+  };
 });
