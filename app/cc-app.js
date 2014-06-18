@@ -3,6 +3,9 @@ angular.module('cc-app', ['cc-data', 'ngRoute'])
 .config(function($routeProvider){
   $routeProvider
   .when('/', {
+    templateUrl: 'home/main.html'
+  })
+  .when('/countries', {
     templateUrl: 'home/home.html',
     controller: 'countriesCtrl'
   })

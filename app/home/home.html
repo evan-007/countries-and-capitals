@@ -2,6 +2,10 @@
   <h2>All the countries</h2>
   <p>Click on a row for more information</p>
   <div ng-if='loading === true'>Loading!!!</div>
+  <p>
+    <input type='text' ng-model='q' placeholder='Search' class='form-control' />
+    <button class="btn btn-primary" ng-click="q = ''">Show All</button>
+  </p>
   <table ng-if='countries' class='table table-bordered'>
     <tr>
       <th>Name</th>
@@ -11,7 +15,7 @@
       <th>Population</th>
       <th>Continent</th>
     </tr>
-    <tr ng-repeat='country in countries' ng-click='goTo(country.countryCode, country.capital)' ng-class='{info : hover}' ng-mouseenter='hover = true' ng-mouseleave='hover = false'>
+    <tr ng-repeat='country in countries | filter: q' ng-click='goTo(country.countryCode, country.capital)' ng-class='{info : hover}' ng-mouseenter='hover = true' ng-mouseleave='hover = false'>
       <td>{{country.countryName}}</td>
       <td>{{country.countryCode}}</td>
       <td>{{country.capital}}</td>
