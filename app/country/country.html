@@ -2,8 +2,17 @@
 <div class='countryData' ng-if='country'>
 	{{country}}
 	<h3>{{country.countryName}}</h3>
-	<img class='map' ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png" />
-	<img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
+  <ul class='list-unstyled'>
+    <li>Continent: {{country.continentName}}</li>
+    <li>Population: {{country.population | number}}</li>
+  </ul>
+  <div class='row'>
+    <div class='col-md-3'><img class='map' ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png" /></div>
+    <div class='col-md-3'><img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" /></div>
+  </div>
+  
+	
+	
 	<div class='neighbors' ng-if='neighbors'>
 	  <ul class='list-inline'>
 	    <li>

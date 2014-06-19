@@ -2,10 +2,31 @@
   text-align: center;
 }
 
+.center-button {
+  margin: 0 auto;
+  display: block;
+  width: 150px;
+}
+
+.half {
+  width: 50%;
+}
+
+.image {
+  display: inline-block;
+  height: auto;
+  width: 200px;
+}
+
 .scroll {
   height: 450px;
   width: 100%;
   overflow-y: scroll;
+}
+
+.countries {
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 .data.ng-enter {
@@ -27,8 +48,8 @@
 }
 
 .stagger-animate.ng-enter {
-  -webkit-transition:.5s linear all;
-  transition:.5s linear all;
+  -webkit-transition:.5s linear all 1s;
+  transition:.5s linear all 1s;
 
   opacity:0;
 }

@@ -1,26 +1,31 @@
-<div class='loading' ng-if='loading'>Loading stuff...</div>
-<div class='countryData' ng-if='capital'>
-	<h3>{{city}} <a ng-href='#/countries/{{capital.countryCode}}'>{{capital.countryName}}</a></h3>
-	<img class='map' ng-src="http://www.geonames.org/img/country/250/{{id}}.png" />
-	<img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
-	<p>
-	  Capital Population: {{capital.population}}
-	  Capital: {{capital.toponymName}}
-	</p>
-	<div class='neighbors'>
-	  <ul class='list-inline'>
-	    <li class='stagger-animate'>
-	    	<ng-pluralize count='neighbors.length' when="{'0': 'No neighboring countries', 
-	    	'1' : '1 neighbor:', 'other': '{} neighbors:'}"></ng-pluralize>
-	    </li>
-	    <li ng-repeat='neighbor in neighbors' class='stagger-animate'>
-	      <a ng-href='/#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>{{neighbor.countryName}}</a>
-	    </li>
-	  </ul>
-	</div>
-	<ul class='list-inline'>
-		<li><a href='#/'>Home</a></li>
-		<li><a href='#/countries'>Countries</a></li>
-	</ul>
-	
+<div class='row'>
+  <div class='col-md-6 col-md-offset-3 countries'>
+    <div class='loading' ng-if='loading'>Loading stuff...</div>
+    <div class='countryData' ng-if='capital'>
+	    <h2><a ng-href='#/countries/{{capital.countryCode}}'>{{capital.countryName}}</a></h2>
+
+	    <ul class='list-unstyled'>
+        <li>Population of Country: {{country.population | number}}</li>
+        <li>Area: {{country.areaInSqKm | number:0}} sq km</li>
+        <li>Capital: {{capital.toponymName}}</li>
+        <li>Capital Population: {{capital.population}}</li>
+    	</ul>
+	    <div class='neighbors'>
+	      <ul class='list-inline'>
+	        <li class='stagger-animate'>
+	    	    <ng-pluralize count='neighbors.length' when="{'0': 'No neighboring countries', 
+	    	    '1' : '1 neighbor:', 'other': '{} neighbors:'}"></ng-pluralize>
+	        </li>
+	        <li ng-repeat='neighbor in neighbors' class='stagger-animate'>
+	          <a ng-href='/#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>
+               {{neighbor.countryName}}</a>
+	        </li>
+	      </ul>
+	    </div>
+      <div class='row'>
+        <img class='image map' ng-src="http://www.geonames.org/img/country/250/{{id}}.png" />
+        <img class='image flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
+      </div>
+    </div>
+  </div>
 </div>
