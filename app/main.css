@@ -29,6 +29,34 @@
   border-radius: 5px;
 }
 
+.fixed-container {
+/* do something for views */
+}
+
+.animate-view {
+
+}
+
+.animate-view.ng-enter, .animate-view.ng-leave {
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+}
+
+.animate-view.ng-enter {
+  opacity: 0;
+}
+
+.animate-view.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+.animate-view.ng-leave {
+  opacity: 1;
+}
+.animate-view.ng-leave-active {
+  opacity: 0;
+}
+
+
 .data.ng-enter {
   -webkit-transition: all .5s linear;
   transition: all .5s linear;
