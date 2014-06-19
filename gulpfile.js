@@ -5,6 +5,7 @@ var minifyHtml = require('gulp-minify-html');
 var minifyCss = require('gulp-minify-css');
 var usemin = require('gulp-usemin');
 var rev = require('gulp-rev');
+var deploy = require("gulp-gh-pages");
 
 gulp.task('connect', function() {
 	connect.server({
@@ -25,6 +26,11 @@ gulp.task('usemin', function() {
       js: [uglify(), rev()]
     }))
     .pipe(gulp.dest('build/'));
+});
+
+gulp.task('deploy', function () {
+    gulp.src("./build/**/*")
+        .pipe(deploy());
 });
 
 gulp.task('default', ['connect']);
