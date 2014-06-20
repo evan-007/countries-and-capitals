@@ -13,6 +13,12 @@ gulp.task('connect', function() {
 	});
 });
 
+gulp.task('demo', function(){
+  connect.server({
+    root: './build/'
+  });
+});
+
 
 gulp.task('copy-html-files', function() {
   gulp.src(['./app/**/*.html', '!./app/index.html'], {base: './app'})

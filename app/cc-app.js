@@ -6,7 +6,7 @@ angular.module('cc-app', ['cc-data', 'ngRoute', 'ngAnimate'])
     templateUrl: 'home/main.html'
   })
   .when('/countries', {
-    templateUrl: 'home/home.html',
+    templateUrl: 'countries/countries.html',
     controller: 'countriesCtrl'
   })
   .when('/countries/:id', {
@@ -28,7 +28,7 @@ angular.module('cc-app', ['cc-data', 'ngRoute', 'ngAnimate'])
   });
   
   $scope.goTo = function(country, capital){
-    if (capital == undefined) {
+    if (capital === undefined) {
       $location.path('/countries'+country);
     } else {
       $location.path('/countries/'+country+'/'+capital);      
