@@ -85,3 +85,29 @@
 .stagger-animate.ng-enter.ng-enter-active {
   opacity: 1;
 }
+
+.spinner {
+  width: 150px;
+  height: 150px;
+  border-top: 2px solid blue;
+  border-right: 2px solid red;
+  border-left: 2px solid green;
+  border-bottom: 2px solid yellow;
+  border-radius: 50px;
+  -webkit-animation: spin-load .5s infinite;
+  -moz-animation: spin-load .5s infinite;
+  -o-animation: spin-load .5s infinite;
+  animation: spin-load .5s infinite;
+}
+@-webkit-keyframes spin-load {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin-load {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
