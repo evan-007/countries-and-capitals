@@ -43,17 +43,21 @@
 }
 
 .animate-view.ng-enter {
-  width: 50%;
+  opacity: 0;
+  z-index:100;
 }
 
 .animate-view.ng-enter.ng-enter-active {
-  width: 100%
+  opacity: 1;
+  z-index:101;
 }
 .animate-view.ng-leave {
   opacity: 1;
+  z-index:101;
 }
 .animate-view.ng-leave-active {
   opacity: 0;
+  z-index:100;
 }
 
 
@@ -87,13 +91,16 @@
 }
 
 .spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   width: 150px;
   height: 150px;
-  border-top: 2px solid blue;
-  border-right: 2px solid red;
-  border-left: 2px solid green;
-  border-bottom: 2px solid yellow;
-  border-radius: 50px;
+  border-top: 30px solid blue;
+  border-right: 30px solid red;
+  border-left: 30px solid green;
+  border-bottom: 30px solid yellow;
+  border-radius: 70px;
   -webkit-animation: spin-load .5s infinite;
   -moz-animation: spin-load .5s infinite;
   -o-animation: spin-load .5s infinite;
