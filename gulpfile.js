@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
+var clean = require('gulp-clean');
 var ngmin = require('gulp-ngmin');
 var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
@@ -14,7 +15,12 @@ gulp.task('connect', function() {
 	});
 });
 
-//too lazy to use weird array format
+gulp.task('clean', function () {  
+  return gulp.src('build', {read: false})
+    .pipe(clean());
+});
+
+//too lazy to use weird array
 gulp.task('format', function() {
   return gulp.src('app/*.js')
   .pipe(ngmin())
@@ -33,6 +39,7 @@ gulp.task('copy-html-files', function() {
     .pipe(gulp.dest('build/'));
 });
 
+//fuck! why only works with double quotes to asset references in index.html?
 gulp.task('usemin', function() {
   gulp.src('./app/index.html')
     .pipe(usemin({
@@ -49,4 +56,4 @@ gulp.task('deploy', function () {
 
 gulp.task('default', ['connect']);
 
-gulp.task('build', ['copy-html-files', 'usemin']);
+gulp.task('build', ['clean', 'copy-html-files', 'usemin']);
