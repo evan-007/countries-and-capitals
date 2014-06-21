@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
+var ngmin = require('gulp-ngmin');
 var uglify = require('gulp-uglify');
 var minifyHtml = require('gulp-minify-html');
 var minifyCss = require('gulp-minify-css');
@@ -11,6 +12,12 @@ gulp.task('connect', function() {
 	connect.server({
 		root: './app/'
 	});
+});
+
+gulp.task('format', function() {
+  return gulp.src('app/*.js')
+  .pipe(ngmin())
+  .pipe(gulp.dest('build'));
 });
 
 gulp.task('demo', function(){
