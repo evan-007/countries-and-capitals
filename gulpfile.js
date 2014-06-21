@@ -8,6 +8,7 @@ var minifyCss = require('gulp-minify-css');
 var usemin = require('gulp-usemin');
 var rev = require('gulp-rev');
 var deploy = require('gulp-gh-pages');
+var runSequence = require('run-sequence');
 
 gulp.task('connect', function() {
 	connect.server({
@@ -57,4 +58,8 @@ gulp.task('deploy', function () {
 
 gulp.task('default', ['connect']);
 
-gulp.task('build', ['clean', 'copy-html-files', 'usemin']);
+//dumps build/ then runs tasks in parallel
+gulp.task('build', function() {
+  runSequence('clean',
+    ['copy-html-files', 'usemin']);
+});
