@@ -33,13 +33,14 @@
   position: relative;
 }
 
-.animate-view {
-  /* position:fixed; breaks country layouts but overlays items correctly */
-}
-
 .animate-view.ng-enter, .animate-view.ng-leave {
   -webkit-transition: all 1s linear;
   transition: all 1s linear;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .animate-view.ng-enter {
