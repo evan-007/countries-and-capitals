@@ -1,34 +1,30 @@
 <div class='loading' ng-if='loading'>
   <div class='spinner'></div>
 </div>
-<div class='countryData' ng-if='country'>
-	{{country}}
-	<h3>{{country.countryName}}</h3>
-  <ul class='list-unstyled'>
-    <li>Continent: {{country.continentName}}</li>
-    <li>Population: {{country.population | number}}</li>
-  </ul>
-  <div class='row'>
-    <div class='col-md-3'><img class='map' ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png" /></div>
-    <div class='col-md-3'><img class='flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" /></div>
-  </div>
-  
-	
-	
-	<div class='neighbors' ng-if='neighbors'>
-	  <ul class='list-inline'>
-	    <li>
-	    	<ng-pluralize count='neighbors.length' when="{'0': 'No neighboring countries', 
-	    	'1' : '1 neighbor:', 'other': '{} neighbors:'}"></ng-pluralize>
-	    </li>
-	    <li ng-repeat='neighbor in neighbors'>
-	      <a ng-href='/#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>{{neighbor.countryName}}</a>
-	    </li>
+<div class='row'>
+	<div class='col-md-6 col-md-offset-3 countries' ng-if='country'>
+		<h3>{{country.countryName}}</h3>
+	  <ul class='list-unstyled'>
+	    <li>Continent: {{country.continentName}}</li>
+	    <li>Population: {{country.population | number}}</li>
 	  </ul>
+	  <div class='row'>
+	    <img class='image map' ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png" />
+	    <img class='image flag' ng-src="http://www.geonames.org/flags/x/{{mapId}}.gif" />
+	  </div>
+	  
+		
+		
+		<div class='neighbors' ng-if='neighbors'>
+		  <ul class='list-inline'>
+		    <li>
+		    	<ng-pluralize count='neighbors.length' when="{'0': 'No neighboring countries', 
+		    	'1' : '1 neighbor:', 'other': '{} neighbors:'}"></ng-pluralize>
+		    </li>
+		    <li ng-repeat='neighbor in neighbors'>
+		      <a ng-href='#/countries/{{neighbor.countryCode}}/{{neighbor.capital}}'>{{neighbor.countryName}}</a>
+		    </li>
+		  </ul>
+		</div>		
 	</div>
-	<ul class='list-inline'>
-		<li><a href='#/'>Home</a></li>
-		<li><a href='#/countries'>Countries</a></li>
-	</ul>
-	
 </div>
