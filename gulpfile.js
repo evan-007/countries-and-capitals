@@ -7,7 +7,7 @@ var minifyHtml = require('gulp-minify-html');
 var minifyCss = require('gulp-minify-css');
 var usemin = require('gulp-usemin');
 var rev = require('gulp-rev');
-var deploy = require("gulp-gh-pages");
+var deploy = require('gulp-gh-pages');
 
 gulp.task('connect', function() {
 	connect.server({
@@ -49,9 +49,10 @@ gulp.task('usemin', function() {
     .pipe(gulp.dest('build/'));
 });
 
+//std in errors
 gulp.task('deploy', function () {
-    gulp.src("./build/**/*")
-        .pipe(deploy());
+    gulp.src('./build/**/*')
+    .pipe(deploy());
 });
 
 gulp.task('default', ['connect']);
