@@ -14,10 +14,11 @@ gulp.task('connect', function() {
 	});
 });
 
+//too lazy to use weird array format
 gulp.task('format', function() {
   return gulp.src('app/*.js')
   .pipe(ngmin())
-  .pipe(gulp.dest('build'));
+  .pipe(gulp.dest('app'));
 });
 
 gulp.task('demo', function(){
