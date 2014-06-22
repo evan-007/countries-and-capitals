@@ -56,12 +56,14 @@
 .animate-view.ng-leave {
   opacity: 1;
   z-index:101;
-  transform: rotateZ(360deg);
+  transform: rotateZ(360deg) translateX(0);
+  -webkit-transform: rotateZ(360deg) translateX(0);
 }
 .animate-view.ng-leave-active {
   opacity: 0;
   z-index:100;
-  transform: rotateZ(0deg);
+  transform: rotateZ(0deg) translateX(50%);
+  -webkit-transform: rotateZ(0deg) translateX(50%);
 }
 
 
