@@ -96,11 +96,15 @@
   opacity: 1;
 }
 
+
+
 .spinner:before {
   position: absolute;
   content: "";
   left: 50%;
   top: 50%;
+  right: 0;
+  bottom: 0;
   width: 150px;
   height: 150px;
   border-top: 30px solid blue;
