@@ -24,7 +24,16 @@ angular.module('cc-app', [
   function ($routeProvider) {
     $routeProvider.when('/', { templateUrl: 'home/main.html' }).when('/countries', {
       templateUrl: 'countries/countries.html',
-      controller: 'countriesCtrl'
+      controller: 'countriesCtrl',
+      resolve: {
+        CountriesData: ['Countries', '$q', function (Countries, $q) {
+          var defer = $q.defer();
+          Countries().then(function(data){
+            defer.resolve(data);
+          });
+          return defer.promise;
+        }]
+      }
     }).when('/countries/:id', {
       templateUrl: 'country/country.html',
       controller: 'countryCtrl'
@@ -34,13 +43,11 @@ angular.module('cc-app', [
     }).otherwise({ redirectTo: '/' });
   }
 ]).controller('countriesCtrl', [
-  'Countries',
+  'CountriesData',
   '$location',
   '$scope',
-  function (Countries, $location, $scope) {
-    Countries().then(function (data) {
-      $scope.countries = data.geonames;
-    });
+  function (CountriesData, $location, $scope) {
+    $scope.countries = CountriesData;
     $scope.goTo = function (country, capital) {
       if (capital === undefined) {
         $location.path('/countries' + country);

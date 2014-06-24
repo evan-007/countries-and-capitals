@@ -7,7 +7,7 @@ angular.module('cc-data', []).constant('COUNTRIES_PATH', 'http://api.geonames.or
     return function () {
       var defer = $q.defer();
       $http.get(COUNTRIES_PATH + API_AUTH, { cache: true }).success(function (data) {
-        defer.resolve(data);
+        defer.resolve(data.geonames);
       });
       return defer.promise;
     };
