@@ -2,7 +2,20 @@ angular.module('cc-app', [
   'cc-data',
   'ngRoute',
   'ngAnimate'
-]).config([
+]).run(function($rootScope, $location, $timeout){
+  $routeScope.$on('$routeChangeError', function() {
+    $location.path("/error");
+  });
+  $routeScope.$on('$routeChangeStart', function() {
+    $routeScope.isLoading = true;
+  });
+  $routeScope.$on('$routeChangeSucess', function() {
+    $timeout(function(){
+      $routeScope.isLoading = false;
+    }, 1000);
+  });
+})
+.config([
   '$routeProvider',
   function ($routeProvider) {
     $routeProvider.when('/', { templateUrl: 'home/main.html' }).when('/countries', {
