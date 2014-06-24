@@ -17,6 +17,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('clean', function () {  
+  //retun makes asynchronous
   return gulp.src('build', {read: false})
     .pipe(clean());
 });
