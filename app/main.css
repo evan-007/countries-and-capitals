@@ -96,8 +96,9 @@
   opacity: 1;
 }
 
-.spinner {
+.spinner:before {
   position: absolute;
+  content: "";
   left: 50%;
   top: 50%;
   width: 150px;

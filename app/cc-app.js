@@ -2,20 +2,24 @@ angular.module('cc-app', [
   'cc-data',
   'ngRoute',
   'ngAnimate'
-]).run(function($rootScope, $location, $timeout){
-  $routeScope.$on('$routeChangeError', function() {
-    $location.path("/error");
-  });
-  $routeScope.$on('$routeChangeStart', function() {
-    $routeScope.isLoading = true;
-  });
-  $routeScope.$on('$routeChangeSucess', function() {
-    $timeout(function(){
-      $routeScope.isLoading = false;
-    }, 1000);
-  });
-})
-.config([
+]).run([
+  '$rootScope',
+  '$location',
+  '$timeout',
+  function ($rootScope, $location, $timeout) {
+    $rootScope.$on('$routeChangeError', function () {
+      $location.path('/error');
+    });
+    $rootScope.$on('$routeChangeStart', function () {
+      $rootScope.isLoading = true;
+    });
+    $rootScope.$on('$routeChangeSuccess', function () {
+      $timeout(function () {
+        $rootScope.isLoading = false;
+      }, 1000);
+    });
+  }
+]).config([
   '$routeProvider',
   function ($routeProvider) {
     $routeProvider.when('/', { templateUrl: 'home/main.html' }).when('/countries', {
@@ -34,10 +38,8 @@ angular.module('cc-app', [
   '$location',
   '$scope',
   function (Countries, $location, $scope) {
-    $scope.loading = true;
     Countries().then(function (data) {
       $scope.countries = data.geonames;
-      $scope.loading = false;
     });
     $scope.goTo = function (country, capital) {
       if (capital === undefined) {
@@ -65,14 +67,11 @@ angular.module('cc-app', [
         $scope.neighbors = neighbors;
       });
     });
-    $scope.loading = true;
     CapitalData(id, capital).then(function (data) {
       $scope.capital = data;
-      $scope.loading = false;
     });
     CountryData(id).then(function (data) {
       $scope.country = data;
-      console.log(data);
     });
   }
 ]).controller('countryCtrl', [
@@ -82,11 +81,8 @@ angular.module('cc-app', [
   function (CountryData, $routeParams, $scope) {
     var countryId = $routeParams.id;
     $scope.mapId = $routeParams.id.toLowerCase();
-    $scope.loading = true;
     CountryData(countryId).then(function (data) {
       $scope.country = data;
-      $scope.loading = false;
-      console.log(data);
     });
   }
 ]);
