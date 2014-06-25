@@ -12,6 +12,7 @@ describe('Countries', function(){
 			}
 		});
 		var data = Countries();
+		console.log(Countries());
 		$httpBackend.flush;
 		expect(data).toContain('france');
 		$httpBackend.verifyNoOutstandingRequest();
