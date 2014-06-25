@@ -1,4 +1,9 @@
-angular.module('cc-data', []).constant('COUNTRIES_PATH', 'http://api.geonames.org/countryInfoJSON?formatted=true&style=full').constant('API_AUTH', '&username=evan007').constant('NEIGHBORS_PATH', 'http://api.geonames.org/neighboursJSON?country=').constant('SEARCH_PATH', 'http://api.geonames.org/searchJSON?').factory('Countries', [
+angular.module('cc-data', [])
+.constant('COUNTRIES_PATH','http://api.geonames.org/countryInfoJSON?formatted=true&style=full')
+.constant('API_AUTH', '&username=evan007')
+.constant('NEIGHBORS_PATH', 'http://api.geonames.org/neighboursJSON?country=')
+.constant('SEARCH_PATH', 'http://api.geonames.org/searchJSON?')
+.factory('Countries', [
   'API_AUTH',
   'COUNTRIES_PATH',
   '$http',
