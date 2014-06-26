@@ -16,8 +16,5 @@ angular.module('cc-app')
   '$routeParams',
   '$scope',
   function (ActiveCountry, $routeParams, $scope) {
-    var countryId = $routeParams.id;
-    console.log(ActiveCountry);
-    $scope.mapId = $routeParams.id.toLowerCase();
     $scope.country = ActiveCountry;
   }])

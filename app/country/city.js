@@ -4,17 +4,28 @@ angular.module('cc-app')
   function ($routeProvider) {
     $routeProvider.when('/countries/:id/:city', {
       templateUrl: './country/city.html',
-      controller: 'cityCtrl'
+      controller: 'cityCtrl',
+      resolve: {
+        activeCountry : ['CountryData', '$route', function(CountryData, $route) {
+          return CountryData($route.current.params.id);
+        }],
+        activeCapital : ['CapitalData', '$route', function(CapitalData, $route) {
+          return CapitalData($route.current.params.id, $route.current.params.city);
+        }],
+        activeNeighbors : ['Neighbors', 'NeighborData', '$route', function(Neighbors, NeighborData, $route) {
+          //todo
+        }]
+      }
     }).otherwise({ redirectTo: '/' });
   }
 ]).controller('cityCtrl', [
-  'CapitalData',
-  'CountryData',
+  'activeCapital',
+  'activeCountry',
   'Neighbors',
   'NeighborData',
   '$routeParams',
   '$scope',
-  function (CapitalData, CountryData, Neighbors, NeighborData, $routeParams, $scope) {
+  function (activeCapital, activeCountry, Neighbors, NeighborData, $routeParams, $scope) {
     var id = $routeParams.id;
     var capital = $routeParams.city;
     $scope.city = $routeParams.city;
@@ -25,11 +36,7 @@ angular.module('cc-app')
         $scope.neighbors = neighbors;
       });
     });
-    CapitalData(id, capital).then(function (data) {
-      $scope.capital = data;
-    });
-    CountryData(id).then(function (data) {
-      $scope.country = data;
-    });
+    $scope.capital = activeCapital;
+    $scope.country = activeCountry;
   }
 ])
