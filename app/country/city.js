@@ -32,9 +32,7 @@ angular.module('cc-app')
     $scope.id = $routeParams.id;
     $scope.mapId = $routeParams.id.toLowerCase();
     Neighbors(id).then(function (data) {
-      NeighborData(data).then(function (neighbors) {
-        $scope.neighbors = neighbors;
-      });
+      $scope.neighbors = data;
     });
     $scope.capital = activeCapital;
     $scope.country = activeCountry;

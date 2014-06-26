@@ -32,10 +32,8 @@ angular.module('cc-data', [])
           for (var n = 0; n < data.geonames.length; n++) {
             countryIds.push(data.geonames[n].countryCode);
           }
-          ;
-          defer.resolve(countryIds);
+          defer.resolve(NeighborData(countryIds));
         }
-        ;
       });
       return defer.promise;
     };
