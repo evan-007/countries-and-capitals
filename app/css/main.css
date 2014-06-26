@@ -96,8 +96,6 @@
   opacity: 1;
 }
 
-
-
 .spinner:before {
   position: absolute;
   content: "";

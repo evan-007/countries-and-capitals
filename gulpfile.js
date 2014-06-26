@@ -24,7 +24,7 @@ gulp.task('clean', function () {
 
 //too lazy to use weird array
 gulp.task('format', function() {
-  return gulp.src('app/*.js')
+  return gulp.src(['app/*.js', 'app/**/*.js'])
   .pipe(ngmin())
   .pipe(gulp.dest('app'));
 });
@@ -41,7 +41,7 @@ gulp.task('copy-html-files', function() {
     .pipe(gulp.dest('build/'));
 });
 
-//fuck! why only works with double quotes to asset references in index.html?
+//only works with double quotes to asset references in index.html
 gulp.task('usemin', function() {
   gulp.src('./app/index.html')
     .pipe(usemin({
