@@ -6,7 +6,7 @@ angular.module('cc-app')
       templateUrl: './countries/countries.html',
       controller: 'countriesCtrl',
       resolve: {
-        CountriesData: ['Countries', '$q', function (Countries, $q) {
+        CountriesData: ['Countries', function (Countries) {
           return Countries();
         }]
       }

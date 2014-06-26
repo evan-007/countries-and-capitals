@@ -12,7 +12,7 @@ angular.module('cc-app')
       }
     })
   }]).controller('countryCtrl', [
-  'CountryData',
+  'ActiveCountry',
   '$routeParams',
   '$scope',
   function (ActiveCountry, $routeParams, $scope) {
