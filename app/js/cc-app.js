@@ -27,24 +27,16 @@ angular.module('cc-app', [
       controller: 'countriesCtrl',
       resolve: {
         CountriesData: ['Countries', '$q', function (Countries, $q) {
-          var defer = $q.defer();
-          Countries().then(function(data){
-            defer.resolve(data);
-          });
-          return defer.promise;
+          return Countries();
         }]
       }
     }).when('/countries/:id', {
       templateUrl: 'country/country.html',
       controller: 'countryCtrl',
       resolve: {
-        activeCountry: ['CountryData', '$q', '$route', function(CountryData, $q, $route) {
-          var defer = $q.defer();
-          CountryData($route.current.params.id).then(function(data){
-            defer.resolve(data);
-            console.log(data);
-          });
-          return defer.promise;
+        ActiveCountry: ['CountryData', '$q', '$route', function(CountryData, $q, $route) {
+          console.log(CountryData($route.current.params.id));
+          return CountryData($route.current.params.id);
         }]
       }
     }).when('/countries/:id/:city', {
@@ -95,9 +87,10 @@ angular.module('cc-app', [
   'CountryData',
   '$routeParams',
   '$scope',
-  function (activeCountry, $routeParams, $scope) {
+  function (ActiveCountry, $routeParams, $scope) {
     var countryId = $routeParams.id;
+    console.log(ActiveCountry);
     $scope.mapId = $routeParams.id.toLowerCase();
-    $scope.country = activeCountry;
+    $scope.country = ActiveCountry;
   }
 ]);
