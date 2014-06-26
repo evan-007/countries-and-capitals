@@ -25,11 +25,6 @@ angular.module('cc-app')
   '$routeParams',
   '$scope',
   function (activeCapital, activeCountry, activeNeighbors, $routeParams, $scope) {
-    var id = $routeParams.id;
-    var capital = $routeParams.city;
-    $scope.city = $routeParams.city;
-    $scope.id = $routeParams.id;
-    $scope.mapId = $routeParams.id.toLowerCase();
     $scope.neighbors = activeNeighbors;
     $scope.capital = activeCapital;
     $scope.country = activeCountry;
