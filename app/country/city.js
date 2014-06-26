@@ -12,8 +12,8 @@ angular.module('cc-app')
         activeCapital : ['CapitalData', '$route', function(CapitalData, $route) {
           return CapitalData($route.current.params.id, $route.current.params.city);
         }],
-        activeNeighbors : ['Neighbors', 'NeighborData', '$route', function(Neighbors, NeighborData, $route) {
-          //todo
+        activeNeighbors : ['Neighbors', '$route', function(Neighbors, $route) {
+          return Neighbors($route.current.params.id);
         }]
       }
     }).otherwise({ redirectTo: '/' });
@@ -21,19 +21,16 @@ angular.module('cc-app')
 ]).controller('cityCtrl', [
   'activeCapital',
   'activeCountry',
-  'Neighbors',
-  'NeighborData',
+  'activeNeighbors',
   '$routeParams',
   '$scope',
-  function (activeCapital, activeCountry, Neighbors, NeighborData, $routeParams, $scope) {
+  function (activeCapital, activeCountry, activeNeighbors, $routeParams, $scope) {
     var id = $routeParams.id;
     var capital = $routeParams.city;
     $scope.city = $routeParams.city;
     $scope.id = $routeParams.id;
     $scope.mapId = $routeParams.id.toLowerCase();
-    Neighbors(id).then(function (data) {
-      $scope.neighbors = data;
-    });
+    $scope.neighbors = activeNeighbors;
     $scope.capital = activeCapital;
     $scope.country = activeCountry;
   }
