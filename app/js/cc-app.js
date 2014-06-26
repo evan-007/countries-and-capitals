@@ -36,7 +36,17 @@ angular.module('cc-app', [
       }
     }).when('/countries/:id', {
       templateUrl: 'country/country.html',
-      controller: 'countryCtrl'
+      controller: 'countryCtrl',
+      resolve: {
+        activeCountry: ['CountryData', '$q', '$route', function(CountryData, $q, $route) {
+          var defer = $q.defer();
+          CountryData($route.current.params.id).then(function(data){
+            defer.resolve(data);
+            console.log(data);
+          });
+          return defer.promise;
+        }]
+      }
     }).when('/countries/:id/:city', {
       templateUrl: 'country/city.html',
       controller: 'cityCtrl'
@@ -85,11 +95,9 @@ angular.module('cc-app', [
   'CountryData',
   '$routeParams',
   '$scope',
-  function (CountryData, $routeParams, $scope) {
+  function (activeCountry, $routeParams, $scope) {
     var countryId = $routeParams.id;
     $scope.mapId = $routeParams.id.toLowerCase();
-    CountryData(countryId).then(function (data) {
-      $scope.country = data;
-    });
+    $scope.country = activeCountry;
   }
 ]);
