@@ -3,7 +3,7 @@ angular.module('cc-app')
   '$routeProvider',
   function ($routeProvider) {
     $routeProvider.when('/countries/:id/:city', {
-      templateUrl: 'country/city.html',
+      templateUrl: './country/city.html',
       controller: 'cityCtrl'
     }).otherwise({ redirectTo: '/' });
   }
