@@ -1,19 +1,25 @@
 describe('Countries', function(){
 	beforeEach(module('cc-data'));
 
-	it('should return an array of countries', inject(function(Countries, $rootScope, $httpBackend){
-		$httpBackend.expect('GET', 'http://api.geonames.org/countryInfoJSON?formatted=true&style=full&username=evan007')
-		.respond({data: 
-			{geonames: 
-				[
-				{name: 'france'}, 
-				{name: 'spain'}
-				]
-			}
+	it('should return an array of countries', function(done){
+		inject(function(Countries, $rootScope, $httpBackend){
+			$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
+				.respond( 
+				{geonames: 
+					[{name: 'france'}, 
+						{name: 'spain'}
+					]
+				}
+			)
+			var status = false
+			Countries().then(function(data){
+				console.log(data[0]);
+				expect(data[0].name).toBe('france');
+			});
+			$rootScope.$digest()
+			$httpBackend.flush();
+			done();
+			$httpBackend.verifyNoOutstandingRequest();
 		});
-		var data = Countries();
-		$httpBackend.flush;
-		expect(data).toContain('france');
-		$httpBackend.verifyNoOutstandingRequest();
-	}));
+	});
 });
