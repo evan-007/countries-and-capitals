@@ -24,4 +24,21 @@ describe('cc-dataSpec', function(){
 			expect(SEARCH_PATH).toMatch(/http:\/\/api.geonames.org\/searchJSON/)
 		});
 	});
+
+	describe('CapitalData factory', function(){
+		it('should return data about the capital', function(done){
+			inject(function(CapitalData, $rootScope, $httpBackend){
+				var responseData = {geonames:[{name: 'blah', countryCode: 'asdf'},
+				{name: 'blahblah', countryCode: '1324'}]}
+				$httpBackend.expectGET(/http:\/\/api.geonames.org\/searchJSON/)
+				.respond(responseData);
+				CapitalData('asdf').then(function(data){
+					expect(data).toEqual(responseData.geonames[0]);
+					done();
+				});
+			$httpBackend.flush();
+			$httpBackend.verifyNoOutstandingRequest();
+			});
+		});
+	});
 });
