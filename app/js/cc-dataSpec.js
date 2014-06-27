@@ -1,4 +1,4 @@
-describe('Countries', function(){
+describe('cc-dataSpec', function(){
 	beforeEach(module('cc-data'));
 
 	it('should return an array of countries', function(done){
@@ -12,6 +12,16 @@ describe('Countries', function(){
 			});
 			$httpBackend.flush();
 			$httpBackend.verifyNoOutstandingRequest();
+		});
+	});
+
+	it('should have constants', function(){
+		inject(function(COUNTRIES_PATH, API_AUTH, NEIGHBORS_PATH, SEARCH_PATH){
+			//if any of the constants change, so do these tests
+			expect(COUNTRIES_PATH).toMatch(/http:\/\/api.geonames.org\/countryInfoJSON/);
+			expect(API_AUTH).toMatch(/evan/);
+			expect(NEIGHBORS_PATH).toMatch(/http:\/\/api.geonames.org\/neighboursJSON/);
+			expect(SEARCH_PATH).toMatch(/http:\/\/api.geonames.org\/searchJSON/)
 		});
 	});
 });
