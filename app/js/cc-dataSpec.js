@@ -1,20 +1,6 @@
 describe('cc-dataSpec', function(){
 	beforeEach(module('cc-data'));
 
-	it('should return an array of countries', function(done){
-		inject(function(Countries, $rootScope, $httpBackend){
-			var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]}
-			$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
-				.respond( responseData)
-			Countries().then(function(data){
-				expect(data).toEqual(responseData.geonames);
-				done();
-			});
-			$httpBackend.flush();
-			$httpBackend.verifyNoOutstandingRequest();
-		});
-	});
-
 	it('should have constants', function(){
 		inject(function(COUNTRIES_PATH, API_AUTH, NEIGHBORS_PATH, SEARCH_PATH){
 			//if any of the constants change, so do these tests
@@ -24,6 +10,22 @@ describe('cc-dataSpec', function(){
 			expect(SEARCH_PATH).toMatch(/http:\/\/api.geonames.org\/searchJSON/)
 		});
 	});
+  
+  describe('Countries service', function(){
+		it('should return an array of countries', function(done){
+			inject(function(Countries, $rootScope, $httpBackend){
+				var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]}
+				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
+					.respond( responseData)
+				Countries().then(function(data){
+					expect(data).toEqual(responseData.geonames);
+					done();
+				});
+				$httpBackend.flush();
+				$httpBackend.verifyNoOutstandingRequest();
+			});
+		});
+  });
 
 	describe('CapitalData factory', function(){
 		it('should return data about the capital', function(done){
@@ -36,8 +38,27 @@ describe('cc-dataSpec', function(){
 					expect(data).toEqual(responseData.geonames[0]);
 					done();
 				});
-			$httpBackend.flush();
-			$httpBackend.verifyNoOutstandingRequest();
+				$httpBackend.flush();
+				$httpBackend.verifyNoOutstandingRequest();
+			});
+		});
+	});
+
+	describe('CountryData factory', function(){
+		it('should return country data', function(done){
+			//identical to CapitalData test, refactor
+			//only difference in 3 services is URL it hits?
+			inject(function(CountryData, $httpBackend){
+				var responseData = {geonames: [{name: 'blah', countryCode: 'adsf'}]}
+				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
+				.respond(responseData);
+
+				CountryData('adsf').then(function(data){
+					expect(data).toEqual(responseData.geonames[0]);
+					done();
+				});
+				$httpBackend.flush();
+				$httpBackend.verifyNoOutstandingRequest();
 			});
 		});
 	});
