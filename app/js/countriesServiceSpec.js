@@ -13,8 +13,7 @@ describe('Countries', function(){
 			)
 			var status = false
 			Countries().then(function(data){
-				console.log(data[0]);
-				expect(data[0].name).toBe('france');
+				expect(data.length).toBe(2);
 			});
 			$rootScope.$digest()
 			$httpBackend.flush();
