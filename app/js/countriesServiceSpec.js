@@ -3,21 +3,14 @@ describe('Countries', function(){
 
 	it('should return an array of countries', function(done){
 		inject(function(Countries, $rootScope, $httpBackend){
+			var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]}
 			$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
-				.respond( 
-				{geonames: 
-					[{name: 'france'}, 
-						{name: 'spain'}
-					]
-				}
-			)
-			var status = false
+				.respond( responseData)
 			Countries().then(function(data){
-				expect(data.length).toBe(2);
+				expect(data).toEqual(responseData.geonames);
+				done();
 			});
-			$rootScope.$digest()
 			$httpBackend.flush();
-			done();
 			$httpBackend.verifyNoOutstandingRequest();
 		});
 	});
