@@ -62,4 +62,47 @@ describe('cc-dataSpec', function(){
 			});
 		});
 	});
+
+	describe('NeighborData', function(){
+		it('returns an array of country data', function(done){
+			inject(function(NeighborData, $httpBackend){
+				var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]}
+				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
+				.respond(responseData);
+
+				NeighborData(['cat', 'fish']).then(function(data){
+					expect(data).toEqual(responseData.geonames);
+					done();
+				});
+				$httpBackend.flush();
+				$httpBackend.verifyNoOutstandingRequest();
+			});
+		});
+	});
+
+	//this factory depends on NeighborData
+	// it gets neighbor ids then passes them to NeighborData
+	// to get the capital names
+  // stub NeighborData to test better?
+  // issues in expect block because Neighbors returns another promise that isn't finished.
+	describe('Neighbors', function(){
+		it('returns an array of NeighborData', function(done){
+			inject(function(Neighbors, NeighborData, $httpBackend){
+				var responseIds = {geonames: [{countryCode: 'cat'}, {countryCode: 'dog'}]}
+				var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]}
+				$httpBackend.expectGET(/http:\/\/api.geonames.org\/neighboursJSON/)
+				.respond(responseIds);
+				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
+				.respond(responseData);
+
+				Neighbors('id').then(function(data){
+					expect(data).toEqual(responseData.geonames);
+					done();
+				});
+
+				$httpBackend.flush();
+				$httpBackend.verifyNoOutstandingRequest();
+			});
+		});
+	})
 });
