@@ -15,6 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+    //jasmine-matchers only works with jasmine 1.x?
+      // './node_modules/jasmine-expect/dist/jasmine-matchers.js',
       './app/bower_components/angular/angular.js',
       './app/bower_components/angular-animate/angular-animate.js',
       './app/bower_components/angular-route/angular-route.js',
