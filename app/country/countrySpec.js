@@ -5,6 +5,6 @@ describe('country.js', function(){
 		inject(function($route){
 			expect($route.routes['/countries/:id'].controller).toBe('countryCtrl');
 			expect($route.routes['/countries/:id'].templateUrl).toBe('./country/country.html');
-		})
-	})
-})
+		});
+	});
+});
