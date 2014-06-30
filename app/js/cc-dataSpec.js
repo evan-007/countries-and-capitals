@@ -16,7 +16,7 @@ describe('cc-dataSpec', function(){
 			inject(function(Countries, $rootScope, $httpBackend){
 
 				var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]};
-
+				//change to when GET
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
 					.respond( responseData);
 
@@ -105,7 +105,7 @@ describe('cc-dataSpec', function(){
 
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/neighboursJSON/)
 				.respond(responseIds);
-				
+
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
 				.respond(responseData);
 
@@ -116,6 +116,7 @@ describe('cc-dataSpec', function(){
 
 				$httpBackend.flush();
 				$httpBackend.verifyNoOutstandingRequest();
+				$httpBackend.verifyNoOutstandingExpectation();
 			});
 		});
 	})
