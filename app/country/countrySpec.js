@@ -34,7 +34,7 @@ describe('country.js', function(){
       
 			expect($route.current.controller).toBe('countryCtrl');
 			expect($route.current.templateUrl).toBe('./country/country.html');
-      expect(fakeData.countryDataDouble).toHaveBeenCalled();
+      expect(fakeData.countryDataDouble).toHaveBeenCalledWith(id);
 		});
 	});
 });
