@@ -1,7 +1,7 @@
 describe('country.js', function(){
   
   var fakeData = {
-    stuff: function(arg){
+    countryDataDouble: function(arg){
       return arg;
     }
   }
@@ -10,11 +10,11 @@ describe('country.js', function(){
   
   beforeEach(function(){
     
-    spyOn(fakeData, 'stuff');
+    spyOn(fakeData, 'countryDataDouble');
     
     module(function($provide){
       $provide.factory('CountryData', function(){
-        return fakeData.stuff;
+        return fakeData.countryDataDouble;
       });
     });
   });
@@ -34,7 +34,7 @@ describe('country.js', function(){
       
 			expect($route.current.controller).toBe('countryCtrl');
 			expect($route.current.templateUrl).toBe('./country/country.html');
-      expect(fakeData.stuff).toHaveBeenCalled();
+      expect(fakeData.countryDataDouble).toHaveBeenCalled();
 		});
 	});
 });
