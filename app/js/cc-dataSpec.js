@@ -103,7 +103,7 @@ describe('cc-dataSpec', function(){
 
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
 				.respond(responseData);
-
+				
 				Neighbors('id').then(function(data){
 					expect(data).toEqual(responseFinal.geonames);
 					done();
