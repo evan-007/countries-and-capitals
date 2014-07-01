@@ -1,9 +1,6 @@
 <div class='row'>
   <div class='col-md-6 col-md-offset-3 countries'>
-    <div class='loading' ng-if='loading'>
-      <div class='spinner'></div>
-    </div>
-    <div class='countryData' ng-if='capital'>
+    <div class='countryData'>
 	    <h2><a ng-href='#/countries/{{capital.countryCode}}'>{{capital.countryName}}</a></h2>
 	    <ul class='list-unstyled'>
         <li>Population of Country: {{country.population | number}}</li>

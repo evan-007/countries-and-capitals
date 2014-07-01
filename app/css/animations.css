@@ -62,10 +62,10 @@
 }
 
 .stagger-animate.ng-enter.ng-enter-active {
-  opacity: 1;
+  opacity: .5;
 }
 
-.spinner:before {
+.spinner:after {
   position: absolute;
   content: "";
   /* why 45 and not 50? */
