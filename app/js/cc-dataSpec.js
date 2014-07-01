@@ -1,4 +1,7 @@
 describe('cc-dataSpec', function(){
+
+	var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]};
+
 	beforeEach(module('cc-data'));
 
 	it('should have constants', function(){
@@ -15,7 +18,6 @@ describe('cc-dataSpec', function(){
 		it('should return an array of countries', function(done){
 			inject(function(Countries, $rootScope, $httpBackend){
 
-				var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]};
 				//change to when GET
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
 					.respond( responseData);
@@ -33,9 +35,6 @@ describe('cc-dataSpec', function(){
 	describe('CapitalData factory', function(){
 		it('should return data about the capital', function(done){
 			inject(function(CapitalData, $rootScope, $httpBackend){
-
-				var responseData = {geonames:[{name: 'blah', countryCode: 'asdf'},
-				{name: 'blahblah', countryCode: '1324'}]};
 
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/searchJSON/)
 				.respond(responseData);
@@ -56,8 +55,6 @@ describe('cc-dataSpec', function(){
 			//only difference in 3 services is URL it hits?
 			inject(function(CountryData, $httpBackend){
 
-				var responseData = {geonames: [{name: 'blah', countryCode: 'adsf'}]}
-
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
 				.respond(responseData);
 
@@ -75,8 +72,6 @@ describe('cc-dataSpec', function(){
 	describe('NeighborData', function(){
 		it('returns an array of country data', function(done){
 			inject(function(NeighborData, $httpBackend){
-
-				var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]};
 
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
 				.respond(responseData);
@@ -101,7 +96,7 @@ describe('cc-dataSpec', function(){
 			inject(function(Neighbors, NeighborData, $httpBackend){
 
 				var responseIds = {geonames: [{countryCode: 'cat'}, {countryCode: 'dog'}]};
-				var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]};
+				var responseFinal = {geonames: [{name: 'france'}, {name: 'spain'}]};
 
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/neighboursJSON/)
 				.respond(responseIds);
@@ -110,7 +105,7 @@ describe('cc-dataSpec', function(){
 				.respond(responseData);
 
 				Neighbors('id').then(function(data){
-					expect(data).toEqual(responseData.geonames);
+					expect(data).toEqual(responseFinal.geonames);
 					done();
 				});
 
