@@ -1,17 +1,20 @@
 describe('country.js', function(){
+  
+  var fakeData = {
+    stuff: function(arg){
+      return arg;
+    }
+  }
+
 	beforeEach(module('cc-app'));
   
   beforeEach(function(){
     
-    var countryData = {
-      stuff: 'some data'
-    }
-    
-    spyOn(countryData, stuff);
+    spyOn(fakeData, 'stuff');
     
     module(function($provide){
-      $provide.factory('Countries', function(){
-        return countryData.stuff;
+      $provide.factory('CountryData', function(){
+        return fakeData.stuff;
       });
     });
   });
@@ -20,7 +23,7 @@ describe('country.js', function(){
 		inject(function($httpBackend, $location, $rootScope, $route){
 
       var id = 'FR';
-      $httpBackend.expectGET('/country.html').respond('...');
+      $httpBackend.expectGET('./country/country.html').respond('...');
       
       $rootScope.$apply(function(){
         $location.path('/countries/' + id);
@@ -31,7 +34,7 @@ describe('country.js', function(){
       
 			expect($route.current.controller).toBe('countryCtrl');
 			expect($route.current.templateUrl).toBe('./country/country.html');
-      expect(countryData.stuff).toHaveBeenCalled();
+      expect(fakeData.stuff).toHaveBeenCalled();
 		});
 	});
 });
