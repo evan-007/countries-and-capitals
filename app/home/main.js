@@ -3,4 +3,5 @@ angular.module('cc-app')
   '$routeProvider',
   function ($routeProvider) {
     $routeProvider.when('/', { templateUrl: './home/main.html' })
+    .otherwise({redirectTo: '/'})
   }])
