@@ -6,7 +6,7 @@ angular.module('cc-app', [
   '$rootScope',
   '$location',
   '$timeout',
-  function ($rootScope, $location, $timeout) {
+  function ($rootScope, $location) {
     $rootScope.$on('$routeChangeError', function () {
       $location.path('/error');
     });
@@ -14,9 +14,7 @@ angular.module('cc-app', [
       $rootScope.isLoading = true;
     });
     $rootScope.$on('$routeChangeSuccess', function () {
-      $timeout(function () {
-        $rootScope.isLoading = false;
-      }, 1000);
+      $rootScope.isLoading = false;
     });
   }
 ])
