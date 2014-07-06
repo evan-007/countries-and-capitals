@@ -2,6 +2,12 @@ describe('cc-dataSpec', function(){
 
 	var responseData = {geonames: [{name: 'france'}, {name: 'spain'}]};
 
+	var fakeData = {
+		NeighborDataDouble: function(array){
+			return array;
+		}
+	}
+
 	beforeEach(module('cc-data'));
 
 	it('should have constants', function(){
@@ -92,16 +98,55 @@ describe('cc-dataSpec', function(){
   // stub NeighborData to test better?
   // issues in expect block because Neighbors returns another promise that isn't finished.
 	describe('Neighbors', function(){
+		// beforeEach(function(){
+		// 	spyOn(fakeData, 'NeighborDataDouble');
+		//
+		// 	module(function($provide){
+		// 		$provide.factory('NeighborData', function(){
+		// 			return fakeData.NeighborDataDouble;
+		// 		})
+		// 	})
+		// })
 		it('returns an array of NeighborData', function(done){
+
+			//fails with unsatisfied request on 2nd $httpBackend
+			inject(function(Neighbors, $httpBackend){
+
+				var responseIds = {geonames: [{countryCode: 'cat'}, {countryCode: 'dog'}]};
+				var responseFinal = {geonames: [{name: 'france'}, {name: 'spain'}]};
+
+				$httpBackend.when('GET', /http:\/\/api.geonames.org\/neighboursJSON/)
+				.respond(responseIds);
+
+
+				Neighbors('id').then(function(data){
+					expect(data).toEqual(responseFinal.geonames);
+					expect(fakeData.NeighborDataDouble).toHaveBeenCalled();
+					done();
+				});
+
+				$httpBackend.flush();
+				$httpBackend.verifyNoOutstandingRequest();
+				$httpBackend.verifyNoOutstandingExpectation();
+			});
+		});
+	});
+
+	describe('Neighbors', function(){
+		it('returns an array of NeighborData try 2', function(done){
+
+			//fails Error: Timeout -
+			//Async callback was not invoked within timeout specified by jasmine.DEFAULT_TIMEOUT_INTERVAL.
+			//on second request
 			inject(function(Neighbors, NeighborData, $httpBackend){
 
 				var responseIds = {geonames: [{countryCode: 'cat'}, {countryCode: 'dog'}]};
 				var responseFinal = {geonames: [{name: 'france'}, {name: 'spain'}]};
 
-				$httpBackend.expectGET(/http:\/\/api.geonames.org\/neighboursJSON/)
+				$httpBackend.when('GET', /http:\/\/api.geonames.org\/neighboursJSON/)
 				.respond(responseIds);
 
-				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
+				$httpBackend.when('GET', /http:\/\/api.geonames.org\/countryInfoJSON/)
 				.respond(responseData);
 
 				Neighbors('id').then(function(data){
