@@ -1,11 +1,11 @@
 describe('/ router', function(){
   beforeEach(module('cc-app'));
   
-  //will this work?
+  var templateRegex = /\/home\/main\.html/;
   
   it('loads the main template', function(){
     inject(function($rootScope, $route, $location, $httpBackend){
-      $httpBackend.expectGET('./home/main.html').respond('...');
+      $httpBackend.expectGET(templateRegex).respond('...');
 
       $rootScope.$apply(function(){
         $location.path('/')
@@ -14,7 +14,7 @@ describe('/ router', function(){
       $httpBackend.flush();
       $httpBackend.verifyNoOutstandingExpectation();
     
-      expect($route.current.templateUrl).toBe('./home/main.html')
+      expect($route.current.templateUrl).toMatch(templateRegex);
     });
   });
   
@@ -22,7 +22,7 @@ describe('/ router', function(){
   it('redirects to / when route is undefined', function(){
     inject(function($rootScope, $route, $location, $httpBackend){
       
-      $httpBackend.expectGET('./home/main.html').respond('...');  
+      $httpBackend.expectGET(templateRegex).respond('...');  
       
       $rootScope.$apply(function(){
         $location.path('/some/definately/notused-route');
@@ -31,7 +31,7 @@ describe('/ router', function(){
       $httpBackend.flush();
       $httpBackend.verifyNoOutstandingExpectation();
       
-      expect($route.current.templateUrl).toBe('./home/main.html');
+      expect($route.current.templateUrl).toMatch(templateRegex);
       expect($route.current.originalPath).toBe('/');
     })
   })
