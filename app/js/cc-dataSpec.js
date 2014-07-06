@@ -7,19 +7,19 @@ describe('cc-dataSpec', function(){
 	it('should have constants', function(){
 		inject(function(COUNTRIES_PATH, API_AUTH, NEIGHBORS_PATH, SEARCH_PATH){
 			//if any of the constants change, so do these tests
-			expect(COUNTRIES_PATH).toBeDefined();
+			expect(COUNTRIES_PATH).toMatch(/http:\/\/api\.geonames\.org/);
 			expect(API_AUTH).toBeDefined();
-			expect(NEIGHBORS_PATH).toBeDefined();
-			expect(SEARCH_PATH).toBeDefined();
+			expect(NEIGHBORS_PATH).toMatch(/http:\/\/api\.geonames\.org/);
+			expect(SEARCH_PATH).toMatch(/http:\/\/api\.geonames\.org/);
 		});
 	});
-  
+
   describe('Countries service', function(){
 		it('should return an array of countries', function(done){
 			inject(function(Countries, $rootScope, $httpBackend){
 
 				//change to when GET
-				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
+				$httpBackend.expectGET(/http:\/\/api.geonames\.org\/countryInfoJSON/)
 					.respond( responseData);
 
 				Countries().then(function(data){
@@ -103,7 +103,7 @@ describe('cc-dataSpec', function(){
 
 				$httpBackend.expectGET(/http:\/\/api.geonames.org\/countryInfoJSON/)
 				.respond(responseData);
-				
+
 				Neighbors('id').then(function(data){
 					expect(data).toEqual(responseFinal.geonames);
 					done();
