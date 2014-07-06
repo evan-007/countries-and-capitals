@@ -1,7 +1,7 @@
 describe('cc-dataSpec', function(){
 
 	var responseData = {totalResultsCount: '4', geonames: [{name: 'france', countryCode: 'FR'}, {name: 'spain', countryCode: 'ES'}]};
-
+	var processedData = ['FR','ES']
 	var fakeData = {
 		NeighborDataDouble: function(array){
 			return array;
@@ -104,8 +104,6 @@ describe('cc-dataSpec', function(){
 		})
 		it('passes data into NeighborData', function(done){
 			//problem was on format of response,
-			//test is useless?
-			//resolve test after first promise to prove its an array?
 
 			inject(function(Neighbors, $httpBackend){
 
@@ -114,8 +112,7 @@ describe('cc-dataSpec', function(){
 
 
 				Neighbors().then(function(data){
-					// expect(data).toEqual(responseData);
-					expect(fakeData.NeighborDataDouble).toHaveBeenCalled();
+					expect(fakeData.NeighborDataDouble).toHaveBeenCalledWith(processedData);
 					done();
 				});
 
